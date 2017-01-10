@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">USAEPAY Sandbox</string>
+    <string name="type_of_transaction">Type of transaction:</string>
+</resources>
