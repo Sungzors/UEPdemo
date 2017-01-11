@@ -20,66 +20,79 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Card Holder:"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="6dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Card Number:"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Expiration:"
+                    android:text="Expiration (MMYY):"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="6dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Charge Amount:"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="6dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Invoice #:"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="6dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tax Amount:"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="6dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PO#:"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="6dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Description"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Customer ID:"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="6dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
                     android:text="Order ID:"
                     android:padding="6dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Billing Street:"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="6dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Billing Zip:"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="CVV2/CVC:"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="6dp"/>
             </LinearLayout>
 
@@ -90,94 +103,107 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="enter name"
+                    android:hint="enter name"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"
-                    android:textSize="10dp"
+                    android:textSize="12sp"
                     android:id="@+id/cardHolder"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="enter number"
+                    android:hint="enter number"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"
-                    android:textSize="10dp"
+                    android:textSize="12sp"
                     android:id="@+id/cardNumber"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="enter date"
+                    android:hint="enter date(MMYY)"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"
-                    android:textSize="10dp"
+                    android:textSize="12sp"
                     android:id="@+id/expiration"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="enter name"
+                    android:hint="enter number"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"
-                    android:textSize="10dp"
+                    android:textSize="12sp"
                     android:id="@+id/chargeAmount"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="enter number"
+                    android:hint="enter number"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"
-                    android:textSize="10dp"
+                    android:textSize="12sp"
                     android:id="@+id/invoice"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="enter number"
+                    android:hint="enter number"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"
-                    android:textSize="10dp"
+                    android:textSize="12sp"
                     android:id="@+id/taxamt"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="enter date"
+                    android:hint="enter date"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"
-                    android:textSize="10dp"
+                    android:textSize="12sp"
                     android:id="@+id/ponum"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="enter text"
+                    android:hint="enter text"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"
-                    android:textSize="10dp"
+                    android:textSize="12sp"
                     android:id="@+id/description"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="enter number"
+                    android:hint="enter number"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"
-                    android:textSize="10dp"
+                    android:textSize="12sp"
                     android:id="@+id/customerid"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="enter number"
+                    android:hint="enter number"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"
-                    android:textSize="10dp"
+                    android:textSize="12sp"
                     android:id="@+id/orderid"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="enter name"
+                    android:hint="enter text"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"
-                    android:textSize="10dp"
+                    android:textSize="12sp"
                     android:id="@+id/billingst"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="enter number"
+                    android:hint="enter number"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"
-                    android:textSize="10dp"
-                    android:id="@+id/invoice"/>
+                    android:textSize="12sp"
+                    android:id="@+id/billingzip"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="enter number"
+                    android:hint="enter number"
+                    android:textColor="@color/colorPrimaryDark"
                     android:padding="5dp"
-                    android:textSize="10dp"
-                    android:id="@+id/taxamt"/>
+                    android:textSize="12sp"
+                    android:id="@+id/cvv2cvc"/>
             </LinearLayout>
 
         </LinearLayout>
