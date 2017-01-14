@@ -8,4 +8,43 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="PaymentLibraryTheme" parent="android:Theme.Light">
+        <!-- Application theme. -->
+    </style>
+
+    <style name="PaymentLibraryCardImage">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="PaymentLibraryHeader">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/payment_library_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/payment_library_text_size</item>
+    </style>
+
+    <style name="PaymentLibraryText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:textColor">@color/payment_library_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/payment_library_text_size</item>
+    </style>
+
+    <style name="PaymentLibraryEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:background">@color/payment_library_edit_background</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textColor">@color/payment_library_edit_text</item>
+        <item name="android:textColorHint">@color/payment_library_edit_text_hint</item>
+        <item name="android:textSize">@dimen/payment_library_text_size</item>
+    </style>
+
 </resources>

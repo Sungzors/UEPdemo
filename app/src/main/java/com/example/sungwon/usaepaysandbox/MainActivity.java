@@ -1,8 +1,8 @@
 package com.example.sungwon.usaepaysandbox;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -13,15 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-import com.usaepay.api.jaxws.CreditCardData;
-import com.usaepay.api.jaxws.GeneralFault_Exception;
-import com.usaepay.api.jaxws.TransactionDetail;
-import com.usaepay.api.jaxws.TransactionRequestObject;
-import com.usaepay.api.jaxws.TransactionResponse;
-import com.usaepay.api.jaxws.UeSecurityToken;
-import com.usaepay.api.jaxws.UeSoapServerPortType;
-import com.usaepay.api.jaxws.usaepay;
+import com.ebizcharge.sdk.classes.CurrencyAmount;
+import com.ebizcharge.sdk.classes.TransactionRequest;
+import com.ebizcharge.sdk.classes.TransactionResponse;
+import com.ebizcharge.sdk.enums.Command;
+import com.ebizcharge.sdk.exception.GatewayException;
 
 import java.util.ArrayList;
 
@@ -32,8 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String Pin = "p6wfNC";
     String ClientIP = "127.0.0.1";
 
-    UeSoapServerPortType client;
-    UeSecurityToken token;
+    private static final int REQUEST_PAYMENT_LIBRARY = 0;
 
     String mOption = "Sale";
 
@@ -91,6 +88,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSubmitButton.setOnClickListener(this);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_PAYMENT_LIBRARY) {
+            TransactionResponse response = data
+                    .getParcelableExtra(PaymentLibraryConstants.TRANSACTION_RESPONSE);
+
+            if (response == null) { // something wrong happened when communicating with the gateway
+                GatewayException exception = data
+                        .getParcelableExtra(PaymentLibraryConstants.GATEWAY_EXCEPTION);
+                exception.printStackTrace();
+            } else {
+                String msg = "Transaction #: " + response.getRefNum() + ", Result: "
+                        + response.getResult() +", Error: " + response.getError();
+                Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+                Log.d(TAG,msg);
+            }
+        }
+    }
+
     public void setupUEPStuff() throws Exception {
 //        client = usaepay.getClient("sandbox.usaepay.com/gate");
 
@@ -99,8 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        URL url = new URL("sandbox.usaepay.com/gate");
 //        usaepay.setAddress(client, url);
 
-        token = usaepay.getToken(SourceKey, Pin, ClientIP);
-
+//        token = usaepay.getToken(SourceKey, Pin, ClientIP);1234
     }
 
     public void setupViews(){
@@ -143,77 +158,73 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void createTransaction() {
         switch(mOption){
             case("Sale"):
-                TransactionRequestObject request = new TransactionRequestObject();
-                if(!TextUtils.isEmpty(mCardHolder.getText().toString())){
+                TransactionRequest request = new TransactionRequest();
                     request.setAccountHolder(mCardHolder.getText().toString());
-                }
-                if(!TextUtils.isEmpty(mCustomerid.getText().toString())){
-                    request.setCustomerID(mCustomerid.getText().toString());
-                }
+
+//                if(!TextUtils.isEmpty(mCustomerid.getText().toString())){
+//                    request.set(mCustomerid.getText().toString());
+//                }
+
+                CurrencyAmount amt = new CurrencyAmount(mChargeAmount.getText().toString());
+                CurrencyAmount tax = new CurrencyAmount(Math.round(Double.valueOf(mTaxamt.getText().toString())), 0);
+                request.setCommand(Command.CC_SALE);
+
+                    amt.add(tax);
+                request.setTotal(amt.add(tax));
+                request.setTax(tax);
+                request.setInvoice(mInvoice.getText().toString());
 
 
-//                Address custAddress = new Address();
-//                custAddress.setStreet(mBillingst.getText().toString());
-//                custAddress.setZip(mBillingzip.getText().toString());
-//                request.setBillingAddress(custAddress);
+//                if(!TextUtils.isEmpty(mDescription.getText().toString())){
+//                    details.setDescription(mDescription.getText().toString());
+//                }
+//                if(!TextUtils.isEmpty(mInvoice.getText().toString())){
+//                    request.setInvoice(mInvoice.getText().toString());
+//                }
+//                if(!TextUtils.isEmpty(mPonum.getText().toString())){
+//                    details.setPONum(mPonum.getText().toString());
+//                }
+//                if(!TextUtils.isEmpty(mOrderid.getText().toString())){
+//                    details.setOrderID(mOrderid.getText().toString());
+//                }
 
-                TransactionDetail details = new TransactionDetail();
-                if(mChargeAmount.getText().toString().trim().equals("")){
-                    mChargeAmount.setError("Amount Charge Required");
-                }else{
-                    details.setAmount(Double.valueOf(mChargeAmount.getText().toString()));
-                }
-                if(!TextUtils.isEmpty(mTaxamt.getText().toString())){
-                    details.setTax(Double.valueOf(mTaxamt.getText().toString()));
-                }
-                if(!TextUtils.isEmpty(mDescription.getText().toString())){
-                    details.setDescription(mDescription.getText().toString());
-                }
-                if(!TextUtils.isEmpty(mInvoice.getText().toString())){
-                    details.setInvoice(mInvoice.getText().toString());
-                }
-                if(!TextUtils.isEmpty(mPonum.getText().toString())){
-                    details.setPONum(mPonum.getText().toString());
-                }
-                if(!TextUtils.isEmpty(mOrderid.getText().toString())){
-                    details.setOrderID(mOrderid.getText().toString());
-                }
-
-                request.setDetails(details);
-
-                CreditCardData ccdata = new CreditCardData();
-                if(!TextUtils.isEmpty(mBillingst.getText().toString())){
-                    ccdata.setAvsStreet(mBillingst.getText().toString());
-                }
-                if(!TextUtils.isEmpty(mBillingzip.getText().toString())){
-                    ccdata.setAvsZip(mBillingzip.getText().toString());
-                }
-                if(mCardNumber.getText().toString().trim().equals("")){
-                    mCardNumber.setError("Card Number Required");
-                }else{
-                    ccdata.setCardNumber(mCardNumber.getText().toString());
-                }
-                if(mExpiration.getText().toString().trim().equals("")){
-                    mExpiration.setError("Expiration Date (MMYY) Required");
-                }else{
-                    ccdata.setCardExpiration(mExpiration.getText().toString());
-                }
-                if(!TextUtils.isEmpty(mCvv2cvc.getText().toString())){
-                    ccdata.setCardCode(mCvv2cvc.getText().toString());
-                }
-                request.setCreditCardData(ccdata);
-
-                TransactionResponse response;
-
-                try {
-                    response = client.runSale(token, request);
-                    //turn into alertdialog
-                    Log.d(TAG, "Response: " + response.getResult() + " RefNum: " + response.getRefNum());
-                } catch (GeneralFault_Exception e) {
-                    e.printStackTrace();
-                }
-
-
+//                request.setDetails(details);
+//
+//                CreditCardData ccdata = new CreditCardData();
+//                if(!TextUtils.isEmpty(mBillingst.getText().toString())){
+//                    ccdata.setAvsStreet(mBillingst.getText().toString());
+//                }
+//                if(!TextUtils.isEmpty(mBillingzip.getText().toString())){
+//                    ccdata.setAvsZip(mBillingzip.getText().toString());
+//                }
+//                if(mCardNumber.getText().toString().trim().equals("")){
+//                    mCardNumber.setError("Card Number Required");
+//                }else{
+//                    ccdata.setCardNumber(mCardNumber.getText().toString());
+//                }
+//                if(mExpiration.getText().toString().trim().equals("")){
+//                    mExpiration.setError("Expiration Date (MMYY) Required");
+//                }else{
+//                    ccdata.setCardExpiration(mExpiration.getText().toString());
+//                }
+//                if(!TextUtils.isEmpty(mCvv2cvc.getText().toString())){
+//                    ccdata.setCardCode(mCvv2cvc.getText().toString());
+//                }
+//                request.setCreditCardData(ccdata);
+//
+//                TransactionResponse response;
+//
+//                try {
+//                    response = client.runSale(token, request);
+//                    //turn into alertdialog
+//                    Log.d(TAG, "Response: " + response.getResult() + " RefNum: " + response.getRefNum());
+//                } catch (GeneralFault_Exception e) {
+//                    e.printStackTrace();
+//                }
+//
+                Intent i = new Intent(this, PaymentLibraryActivity.class);
+                i.putExtra(PaymentLibraryConstants.TRANSACTION_REQUEST, request);
+                startActivityForResult(i, REQUEST_PAYMENT_LIBRARY);
         }
     }
 
@@ -230,6 +241,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         view1.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
+
                 if((event.getAction()==KeyEvent.ACTION_UP)&&(keyCode==KeyEvent.KEYCODE_ENTER))
                 {
                     view1.clearFocus();
