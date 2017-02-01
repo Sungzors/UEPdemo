@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,9 +28,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final String TAG = "Main";
-    String SourceKey = "_95k469ivih82RKXPv7T9dE44vKHR71Y";
-    String Pin = "p6wfNC";
-    String ClientIP = "127.0.0.1";
 
     private static final int REQUEST_PAYMENT_LIBRARY = 0;
 
@@ -59,11 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        try {
-            setupUEPStuff();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         mSubmitButton = (Button)findViewById(R.id.submitButton);
         mContainer = (LinearLayout)findViewById(R.id.transactionContainer);
         mOptionDropDown = (Spinner)findViewById(R.id.typeofTrans);
@@ -138,18 +132,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mBillingst = (EditText)findViewById(R.id.billingst);
                 mBillingzip = (EditText)findViewById(R.id.billingzip);
                 mCvv2cvc = (EditText)findViewById(R.id.cvv2cvc);
-//                autoNext(mCardHolder, mCardNumber);
-//                autoNext(mCardNumber, mExpiration);
-//                autoNext(mExpiration, mChargeAmount);
-//                autoNext(mChargeAmount, mInvoice);
-//                autoNext(mInvoice, mTaxamt);
-//                autoNext(mTaxamt, mPonum);
-//                autoNext(mPonum, mDescription);
-//                autoNext(mDescription, mCustomerid);
-//                autoNext(mCustomerid, mOrderid);
-//                autoNext(mOrderid, mBillingst);
-//                autoNext(mBillingst, mBillingzip);
-//                autoNext(mBillingzip, mCvv2cvc);
                 break;
 
         }
@@ -159,69 +141,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch(mOption){
             case("Sale"):
                 TransactionRequest request = new TransactionRequest();
-                    request.setAccountHolder(mCardHolder.getText().toString());
+//                    request.setAccountHolder(mCardHolder.getText().toString());
 
 //                if(!TextUtils.isEmpty(mCustomerid.getText().toString())){
 //                    request.set(mCustomerid.getText().toString());
 //                }
 
-                CurrencyAmount amt = new CurrencyAmount(mChargeAmount.getText().toString());
-                CurrencyAmount tax = new CurrencyAmount(Math.round(Double.valueOf(mTaxamt.getText().toString())), 0);
+                if (mChargeAmount.length()>0){
+                    CurrencyAmount amt = new CurrencyAmount(mChargeAmount.getText().toString());
+                    if (mTaxamt.length()>0){
+                        CurrencyAmount tax = new CurrencyAmount(Math.round(Double.valueOf(mTaxamt.getText().toString())), 2);
+                        amt.add(tax);
+                        request.setTax(tax);
+                    }
+                    request.setTotal(amt);
+                } else if(mChargeAmount.length()==0){
+                    Toast.makeText(this, "Please enter an amount", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 request.setCommand(Command.CC_SALE);
-
-                    amt.add(tax);
-                request.setTotal(amt.add(tax));
-                request.setTax(tax);
-                request.setInvoice(mInvoice.getText().toString());
-
-
-//                if(!TextUtils.isEmpty(mDescription.getText().toString())){
-//                    details.setDescription(mDescription.getText().toString());
-//                }
-//                if(!TextUtils.isEmpty(mInvoice.getText().toString())){
-//                    request.setInvoice(mInvoice.getText().toString());
-//                }
-//                if(!TextUtils.isEmpty(mPonum.getText().toString())){
-//                    details.setPONum(mPonum.getText().toString());
-//                }
-//                if(!TextUtils.isEmpty(mOrderid.getText().toString())){
-//                    details.setOrderID(mOrderid.getText().toString());
-//                }
-
-//                request.setDetails(details);
-//
-//                CreditCardData ccdata = new CreditCardData();
-//                if(!TextUtils.isEmpty(mBillingst.getText().toString())){
-//                    ccdata.setAvsStreet(mBillingst.getText().toString());
-//                }
-//                if(!TextUtils.isEmpty(mBillingzip.getText().toString())){
-//                    ccdata.setAvsZip(mBillingzip.getText().toString());
-//                }
-//                if(mCardNumber.getText().toString().trim().equals("")){
-//                    mCardNumber.setError("Card Number Required");
-//                }else{
-//                    ccdata.setCardNumber(mCardNumber.getText().toString());
-//                }
-//                if(mExpiration.getText().toString().trim().equals("")){
-//                    mExpiration.setError("Expiration Date (MMYY) Required");
-//                }else{
-//                    ccdata.setCardExpiration(mExpiration.getText().toString());
-//                }
-//                if(!TextUtils.isEmpty(mCvv2cvc.getText().toString())){
-//                    ccdata.setCardCode(mCvv2cvc.getText().toString());
-//                }
-//                request.setCreditCardData(ccdata);
-//
-//                TransactionResponse response;
-//
-//                try {
-//                    response = client.runSale(token, request);
-//                    //turn into alertdialog
-//                    Log.d(TAG, "Response: " + response.getResult() + " RefNum: " + response.getRefNum());
-//                } catch (GeneralFault_Exception e) {
-//                    e.printStackTrace();
-//                }
-//
+                if (mInvoice.length()>0){
+                    request.setInvoice(mInvoice.getText().toString());
+                }
+                if (mOrderid.length()>0){
+                    request.setOrderId(mOrderid.getText().toString());
+                }
+                if (mDescription.length()>0){
+                    request.setDescription(mDescription.getText().toString());
+                }
                 Intent i = new Intent(this, PaymentLibraryActivity.class);
                 i.putExtra(PaymentLibraryConstants.TRANSACTION_REQUEST, request);
                 startActivityForResult(i, REQUEST_PAYMENT_LIBRARY);
@@ -235,6 +182,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 createTransaction();
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.customersetting){
+            Intent intent = new Intent(this, CustomerSettingActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void autoNext(final EditText view1, final EditText view2){

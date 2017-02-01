@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expiration (MMYY):"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="5dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="enter date(MMYY)"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="5dp"
+            android:imeOptions="actionNext"
+            android:textSize="12sp"
+            android:id="@+id/expiration"
+            android:inputType="number"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Card Number:"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="5dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="enter number"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="5dp"
+            android:textSize="12sp"
+            android:id="@+id/cardNumber"
+            android:imeOptions="actionNext"
+            android:inputType="number"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Card Holder:"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="5dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="enter name"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="5dp"
+            android:textSize="12sp"
+            android:inputType="textPersonName"
+            android:id="@+id/cardHolder"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Customer ID:"
+            android:padding="5dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="enter number"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="5dp"
+            android:inputType="textPersonName"
+            android:textSize="12sp"
+            android:id="@+id/customerid"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Billing Zip:"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="5dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="enter number"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="5dp"
+            android:textSize="12sp"
+            android:id="@+id/billingzip"
+            android:inputType="number"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CVV2/CVC:"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="5dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="enter number"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="5dp"
+            android:textSize="12sp"
+            android:id="@+id/cvv2cvc"
+            android:inputType="number"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Billing Street:"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="5dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="enter text"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="5dp"
+            android:textSize="12sp"
+            android:inputType="textPersonName"
+            android:id="@+id/billingst"/>
+    </LinearLayout>
+
+</LinearLayout>

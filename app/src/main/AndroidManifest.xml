@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sungwon.usaepaysandbox">
-    <uses-permission
-        android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -17,12 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="PaymentLibraryActivity" />
-        <activity android:name="EmailActivity" />
+        <activity android:name=".PaymentLibraryActivity" />
+        <activity android:name=".EmailActivity" />
         <activity
-            android:name="SignatureActivity"
+            android:name=".SignatureActivity"
             android:screenOrientation="landscape" />
+        <activity android:name=".CustomerSettingActivity"></activity>
     </application>
 
 </manifest>

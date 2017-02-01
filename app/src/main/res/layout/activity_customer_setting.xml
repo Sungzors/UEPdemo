@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ScrollView
+    android:layout_height="match_parent"
+    android:padding="5dp">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Customer ID: "
+            android:layout_gravity="center"/>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:id="@+id/typeofCust"
+            android:layout_gravity="center"></Spinner>
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,18 +41,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Charge Amount:"
+                        android:text="Customer ID: "
                         android:textColor="@color/colorPrimaryDark"
                         android:padding="5dp"/>
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="enter number"
+                        android:hint="enter customer"
                         android:textColor="@color/colorPrimaryDark"
                         android:padding="5dp"
                         android:textSize="12sp"
-                        android:id="@+id/chargeAmount"
-                        android:inputType="numberDecimal"/>
+                        android:id="@+id/customerid"
+                        android:inputType="number"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -44,18 +61,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Invoice #:"
+                        android:text="Customer Number"
                         android:textColor="@color/colorPrimaryDark"
                         android:padding="5dp"/>
-                    <EditText
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="enter number"
                         android:textColor="@color/colorPrimaryDark"
                         android:padding="5dp"
                         android:textSize="12sp"
-                        android:inputType="textPersonName"
-                        android:id="@+id/invoice"/>
+                        android:id="@+id/customerNum"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -64,18 +79,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tax Amount:"
+                        android:text="Address: "
                         android:textColor="@color/colorPrimaryDark"
                         android:padding="5dp"/>
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="enter number"
+                        android:hint="enter address"
                         android:textColor="@color/colorPrimaryDark"
                         android:padding="5dp"
                         android:textSize="12sp"
-                        android:id="@+id/taxamt"
-                        android:inputType="numberDecimal"/>
+                        android:id="@+id/address"
+                        android:inputType="textPersonName"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -84,18 +99,37 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="PO#:"
+                        android:text="Zip Code: "
                         android:textColor="@color/colorPrimaryDark"
                         android:padding="5dp"/>
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="enter num"
+                        android:hint="enter address"
                         android:textColor="@color/colorPrimaryDark"
                         android:padding="5dp"
-                        android:inputType="textPersonName"
                         android:textSize="12sp"
-                        android:id="@+id/ponum"/>
+                        android:id="@+id/zipcode"
+                        android:maxLength="5"
+                        android:inputType="number"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date Created: "
+                        android:textColor="@color/colorPrimaryDark"
+                        android:padding="5dp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:padding="5dp"
+                        android:textSize="12sp"
+                        android:id="@+id/dateCreated"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -105,7 +139,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Description"
+                        android:text="Notes: "
                         android:textColor="@color/colorPrimaryDark"
                         android:padding="5dp"/>
                     <EditText
@@ -116,7 +150,7 @@
                         android:padding="5dp"
                         android:inputType="textPersonName"
                         android:textSize="12sp"
-                        android:id="@+id/description"/>
+                        android:id="@+id/notes"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -127,20 +161,37 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimaryDark"
-                        android:text="Order ID:"
+                        android:text="URL: "
                         android:padding="5dp"/>
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="enter number"
+                        android:hint="enter link"
                         android:textColor="@color/colorPrimaryDark"
                         android:padding="5dp"
                         android:textSize="12sp"
                         android:inputType="textPersonName"
-                        android:id="@+id/orderid"/>
+                        android:id="@+id/custurl"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="Add Credit Card"
+            android:id="@+id/addcc"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="Add/Update Customer"
+            android:id="@+id/addcust"/>
+
+
+
+    </LinearLayout>
 
 </LinearLayout>

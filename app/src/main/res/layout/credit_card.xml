@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/payment_library_fragment_background"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/payment_library_white"
+        android:minHeight="48dp"
+        android:padding="8dp" >
+
+        <TextView
+            style="@style/PaymentLibraryHeader"
+            android:layout_centerVertical="true"
+            android:text="@string/payment_library_total" />
+
+        <TextView
+            android:id="@+id/payment_library_total"
+            style="@style/PaymentLibraryHeader"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/payment_library_total" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/payment_library_activity_vertical_margin"
+            android:paddingLeft="@dimen/payment_library_activity_horizontal_margin"
+            android:paddingRight="@dimen/payment_library_activity_horizontal_margin"
+            android:paddingTop="@dimen/payment_library_activity_vertical_margin" >
+
+            <TextView
+                style="@style/PaymentLibraryText"
+                android:text="@string/payment_library_available_cards" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    style="@style/PaymentLibraryCardImage"
+                    android:contentDescription="@null"/>
+
+                <ImageView
+                    style="@style/PaymentLibraryCardImage"
+                    android:contentDescription="@null"/>
+
+                <ImageView
+                    style="@style/PaymentLibraryCardImage"
+                    android:contentDescription="@null" />
+
+                <ImageView
+                    style="@style/PaymentLibraryCardImage"
+                    android:contentDescription="@null"/>
+
+                <ImageView
+                    style="@style/PaymentLibraryCardImage"
+                    android:contentDescription="@null"/>
+            </LinearLayout>
+
+            <TextView
+                style="@style/PaymentLibraryText"
+                android:text="@string/payment_library_cc_name" />
+
+            <EditText
+                android:id="@+id/payment_library_cc_name"
+                style="@style/PaymentLibraryEditText"
+                android:hint="@string/payment_library_hint_cc_name"
+                android:inputType="textPersonName" />
+
+            <TextView
+                style="@style/PaymentLibraryText"
+                android:text="@string/payment_library_cc_number" />
+
+            <EditText
+                android:id="@+id/payment_library_cc_number"
+                style="@style/PaymentLibraryEditText"
+                android:hint="@string/payment_library_hint_cc_number"
+                android:inputType="number"
+                android:maxLength="16" />
+
+            <TextView
+                style="@style/PaymentLibraryText"
+                android:text="@string/payment_library_cc_expiration" />
+
+            <EditText
+                android:id="@+id/payment_library_cc_expiration"
+                style="@style/PaymentLibraryEditText"
+                android:hint="@string/payment_library_hint_cc_expiration"
+                android:inputType="number"
+                android:maxLength="4" />
+
+            <TextView
+                style="@style/PaymentLibraryText"
+                android:text="@string/payment_library_cc_cvv" />
+
+            <EditText
+                android:id="@+id/payment_library_cc_cvv"
+                style="@style/PaymentLibraryEditText"
+                android:hint="@string/payment_library_hint_cc_cvv"
+                android:inputType="number"
+                android:maxLength="4" />
+
+            <Button
+                android:id="@+id/payment_library_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:minHeight="48dp"
+                android:minWidth="128dp"
+                android:text="@string/payment_library_pay"
+                android:textColor="@color/payment_library_white" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
